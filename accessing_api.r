@@ -31,3 +31,55 @@ gitDF = jsonlite::fromJSON(jsonlite::toJSON(json1))
 
 # Subset data.frame
 gitDF[gitDF$full_name == "harryob2/Biography-Assignment", "created_at"] 
+
+################################################################################
+
+### Collecting & Displaying My Data
+# Retrieve data
+myData = fromJSON("https://api.github.com/users/harryob2")
+
+# Count followers
+myData$followers
+
+# Usernames of followers
+followers = fromJSON("https://api.github.com/users/harryob2/followers")
+followers$login
+
+# Display the number of users I am following
+myData$following
+
+# Gives user names of all the users I am following
+following = fromJSON("https://api.github.com/users/yangja1/following")
+following$login
+
+# Display the number of repositories I have
+myData$public_repos
+
+# Gives the name and creation date for my repositories
+repositories = fromJSON("https://api.github.com/users/harryob2/repos")
+repositories$name
+repositories$created_at
+
+
+#For this assignment I have used Fabien Potencier's Github Account - fabpot
+#I used him because I looked up famous people on Github and his was the first to come up
+
+#Prepare the data before running it:
+allData = GET("https://api.github.com/users/fabpot", gtoken)
+dataCont = content(allData)
+followers = GET("https://api.github.com/users/fabpot/followers?per_page=100", gtoken)
+followCont = content(followers)
+repository = GET("https://api.github.com/users/fabpot/repos", gtoken)
+repoCont = content(repository)
+
+dataFrame = jsonlite::fromJSON(jsonlite::toJSON(dataCont))
+followerFrame = jsonlite::fromJSON(jsonlite::toJSON(followCont))
+repoFrame = jsonlite::fromJSON(jsonlite::toJSON(repoCont))
+
+dataFrame$followers         #Num followers
+dataFrame$public_repos      #Num public repos
+dataFrame$login             #login name
+
+length(followerFrame$login)
+repoFrame$name              #Repo names
+repoFrame$created_at        #Date repo created
