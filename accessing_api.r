@@ -49,7 +49,7 @@ followers$login
 myData$following
 
 # Gives user names of all the users I am following
-following = fromJSON("https://api.github.com/users/yangja1/following")
+following = fromJSON("https://api.github.com/users/harryob2/following")
 following$login
 
 # Display the number of repositories I have
