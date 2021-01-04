@@ -6,6 +6,8 @@ library(jsonlite)
 library(httpuv)
 #install.packages("httr")
 library(httr)
+#install.packages("plotly")
+library(plotly)
 
 # Choose application
 oauth_endpoints("github")
@@ -17,7 +19,7 @@ myapp <- oauth_app(appname = "Harry_O_Brien_CSU33012",
 github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
 
 # Use API
-gtoken <- config(token = github_token)
+gtoken <- httr::config(token = github_token)
 req <- GET("https://api.github.com/users/harryob2/repos", gtoken)
 
 # Take action on http error
@@ -134,6 +136,8 @@ for(i in 1:length(user_ids))
   }
   next
 }
+
+
 
 #Plotly is a seperate SaaS website for embedding cool charts in code. It's what the economist and ft use.
 Sys.setenv("plotly_username"="harryob2")
